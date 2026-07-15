@@ -13,13 +13,8 @@ const authMiddleware=(req,res,next)=>{
         const actualToken=token.replace("Bearer ","")
 
         const decoded=jwt.verify(actualToken,process.env.JWT_SECRET)
-        const user=await User.findById(decoded.userId).select("-password")
-        if(!user){
-            return res.status(404).json({
-                message:"USer not found"
-            })
-        }
-        req.user=user
+        
+        req.user=decoded
         next()
 
     }catch(error){
