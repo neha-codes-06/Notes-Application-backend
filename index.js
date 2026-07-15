@@ -9,6 +9,10 @@ connectToMongodB()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+
+app.get("/",(req,res)=>{
+    res.send("Server is running")
+})
 const authRoutes=require("./routes/authRoutes")
 app.use("/",authRoutes)
 
